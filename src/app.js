@@ -16,7 +16,7 @@ var App = React.createClass({
                 {/* equivalent to Ember's {{outlet}} */}
                 <this.props.activeRouteHandler/>
 
-                <Footer />
+                <Footer timeStamp={this._timeStamp()}/>
             </section>
         );
     }

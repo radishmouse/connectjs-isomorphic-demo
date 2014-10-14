@@ -1,5 +1,7 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
+'use strict';
+
 var React = require('react');
 window.React = React; // So we can use the nice React dev tools.
 
@@ -24339,7 +24341,7 @@ var App = React.createClass({displayName: 'App',
                 /* equivalent to Ember's {{outlet}} */
                 this.props.activeRouteHandler(null), 
 
-                Footer(null)
+                Footer({timeStamp: this._timeStamp()})
             )
         );
     }
@@ -24355,7 +24357,7 @@ var React = require('react');
 var About = React.createClass({displayName: 'About',
     render: function () {
         return (
-            React.DOM.div(null, "About")
+            React.DOM.h1(null, "About")
         );
     }
 });
@@ -24374,7 +24376,7 @@ var Footer = React.createClass({displayName: 'Footer',
     render: function () {
         return (
             React.DOM.footer(null, 
-                React.DOM.p(null, "© 2014 Levitato")
+                React.DOM.p(null, "© 2014 Levi-tato - ", this.props.timeStamp)
             )
         );
     }
@@ -24465,7 +24467,7 @@ var React = require('react');
 var Yep = React.createClass({displayName: 'Yep',
     render: function () {
         return (
-            React.DOM.div(null, "Yep")
+            React.DOM.h1(null, "Yep")
         );
     }
 });
@@ -24478,18 +24480,19 @@ module.exports = Yep;
 /** @jsx React.DOM */
 'use strict';
 
-// Everything begins with routing
 var Router = require('react-router');
 var Route = Router.Route;
 var Routes = Router.Routes;
-var NotFoundRoute = Router.NotFoundRoute;
 var DefaultRoute = Router.DefaultRoute;
+// var NotFoundRoute = Router.NotFoundRoute;
 
 var App = require('./App');
 var HelloWorld = require('./components/hello');
 var About = require('./components/about');
 var Yep = require('./components/yep');
 
+// This is a tricky thing.
+// I want to detect whether I'm in the browser or if I'm on the server
 var dev = false;
 
 var routes = (

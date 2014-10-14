@@ -15,19 +15,21 @@ var Router = require('react-router');
 var AppRoutes = require('../src/routes');
 
 // Deal with our static files, like `scripts/bundle.js`
-webapp.use('/scripts', express.static(path.join(__dirname, '../static/scripts')))
+webapp.use('/scripts', express.static(path.join(__dirname, '../client/scripts')))
 
-webapp.get('/', function (req, res) {
+// Other than our /scripts folder, we want to match any other route
+// and then our react app take over, based on the route specified by req.path
+webapp.get('*', function (req, res) {
     /*
         # Duplicating the browser-based rendering, in two parts.
 
         ## Part 1: Recreating the markup
 
         `index.html` contains a static HTML doc and a script tag for
-        the `static/scripts/bundle.js` file.
+        the `client/scripts/bundle.js` file.
 
         The `src/main.js` file is the browserify target that gets turned into
-        the `static/scripts/bundle.js` file.
+        the `client/scripts/bundle.js` file.
 
         In `src/main.js`, we call `React.renderComponent(AppRoutes, document.body);`
         This renders the routes, which loads the App.
