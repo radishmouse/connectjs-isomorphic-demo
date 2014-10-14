@@ -1,0 +1,25 @@
+{
+  "name": "isomorphic",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "BSD-2-Clause",
+  "devDependencies": {
+    "gulp": "~3.8.8",
+    "browser-sync": "~1.5.8",
+    "browserify": "~6.1.0",
+    "react": "~0.11.2",
+    "react-router": "~0.9.4",
+    "reactify": "~0.14.0",
+    "vinyl-source-stream": "~1.0.0"
+  },
+  "dependencies": {
+    "react": "~0.11.2",
+    "express": "~4.9.7",
+    "node-jsx": "~0.11.0"
+  }
+}
