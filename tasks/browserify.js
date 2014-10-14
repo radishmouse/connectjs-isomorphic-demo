@@ -5,7 +5,9 @@ var source = require('vinyl-source-stream');
 
 module.exports = function (src, dest) {
     return function () {
-        var b = browserify();
+        var b = browserify({
+            insertGlobals : true
+        });
         b.transform(reactify);
         b.add([src]);
         return b.bundle()

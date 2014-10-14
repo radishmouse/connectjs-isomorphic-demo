@@ -1,7 +1,7 @@
 var paths = {
     baseDir: './static',
     js: {
-        app: './src/app.js', // entry point for application
+        app: './src/main.js', // entry point for application
         src: './src/**/*.js',
         dest: './static/scripts/'
     }
@@ -14,5 +14,7 @@ gulp.task('build', browserify);
 gulp.task('browser-sync', ['build'], bSync.sync(paths.baseDir));
 
 gulp.task('default', ['browser-sync'], function () {
-    gulp.watch(paths.js.src, ['build', bSync.reload]);
+    gulp.watch(paths.js.src, ['build', function () {
+        bSync.reload(); // full reload
+    }]);
 })

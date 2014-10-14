@@ -5,8 +5,9 @@ var reload = browserSync.reload;
 function _sync(dir){
     return function () {
         browserSync({
+            open: false,
             server: {
-                baseDir: dir
+                baseDir: dir,
             }
         });
     };

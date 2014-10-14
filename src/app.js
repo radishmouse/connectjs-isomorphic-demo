@@ -3,8 +3,6 @@ var React = require('react');
 
 var Header = require('./components/header');
 var Footer = require('./components/footer');
-var HelloWorld = require('./components/hello');
-
 
 var App = React.createClass({
     _timeStamp: function () {
@@ -14,8 +12,10 @@ var App = React.createClass({
         return (
             <section>
                 <Header />
-                <HelloWorld />
-                <p>{this._timeStamp()}</p>
+
+                {/* equivalent to Ember's {{outlet}} */}
+                <this.props.activeRouteHandler/>
+
                 <Footer />
             </section>
         );
