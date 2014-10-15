@@ -1,9 +1,11 @@
 'use strict';
 
 var React = require('react');
-window.React = React; // So we can use the nice React dev tools.
+window.React = React; // So we can use the nice React Dev Ttools.
 
-// duplicated in index.js
+//---------------------------------------------------------------
+// Mount the router to the DOM
+//---------------------------------------------------------------
 var AppRoutes = require('./routes');
 /*
     AppRouter is the real entry point for our application.

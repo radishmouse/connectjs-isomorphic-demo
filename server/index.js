@@ -1,31 +1,33 @@
 
 'use strict';
 
-// We will use express for
+// We will use express for serving static files (css, js)
+// and directing other requests to the React router.
+// (We may add proxying to an API later on.)
 var express = require('express');
 var webapp = express();
 var path = require('path');
 
-// We want to be able to interpret JSX on the fly
 var React = require('react');
+// We want to be able to interpret JSX on the fly
 require('node-jsx').install();
 
 // We are loading the Router and not the App itself.
 var Router = require('react-router');
 var AppRoutes = require('../src/routes');
 
-// Deal with our static files, like `scripts/bundle.js`
-webapp.use('/scripts', express.static(path.join(__dirname, '../client/scripts')))
+// Deal with our static files first, e.g. `scripts/bundle.js`
+webapp.use('/scripts', express.static(path.join(__dirname, '../client/scripts')));
 
 // Other than our /scripts folder, we want to match any other route
-// and then our react app take over, based on the route specified by req.path
+// and let our react app take over, based on the value of req.path
 webapp.get('*', function (req, res) {
     /*
         # Duplicating the browser-based rendering, in two parts.
 
         ## Part 1: Recreating the markup
 
-        `index.html` contains a static HTML doc and a script tag for
+        `client/index.html` contains a static HTML doc and a script tag for
         the `client/scripts/bundle.js` file.
 
         The `src/main.js` file is the browserify target that gets turned into
@@ -48,17 +50,23 @@ webapp.get('*', function (req, res) {
         ## Part 2: Mounting the React Components with Routing
 
         The router I chose works nicely with React, as it is just a component.
-        But, these components don't work that well with server-side rendering.
+        But, it doesn't work that well with server-side rendering.
 
-        Luckily, as of yesterday, they merged in some support for just that.
+        Luckily, as of yesterday (2014/10/13), they merged in some support for just that.
         I have to use `Router.renderRoutesToString` to render the routes.
     */
     // Based on: https://github.com/rackt/react-router/blob/1b1a62b04b73f01eb64b3a0983c9c6781e65b6b9/modules/utils/__tests__/ServerRendering-test.js
     // And: https://github.com/rackt/react-router/commit/1b1a62b04b73f01eb64b3a0983c9c6781e65b6b9
+
+    var htmlString = '<!doctype html><html><head></head><body>';
+    htmlString += string;
+    htmlString += '<script src="scripts/bundle.js"></script></body></html>';
     Router.renderRoutesToString(AppRoutes, req.path, function (err, reason, string) {
-        res.send('<!doctype html><html><head></head><body>' + string + '<script src="scripts/bundle.js"></script></body></html>');
+        res.send(htmlString);
     });
 });
 
+var PORT = 1337;
+webapp.listen(PORT);
+console.log('Listening on ' + PORT);
 
-webapp.listen(1337);

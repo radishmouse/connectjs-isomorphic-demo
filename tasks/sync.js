@@ -1,5 +1,6 @@
 'use strict';
 
+// BrowserSync is a better live-reload + static server
 var browserSync = require('browser-sync');
 var reload = browserSync.reload;
 
@@ -18,7 +19,7 @@ function _reload(opts){
     return function () {
         reload(opts || {
             stream: true
-        })
+        });
     }
 }
 
