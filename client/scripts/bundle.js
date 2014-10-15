@@ -24372,6 +24372,12 @@ module.exports = About;
 
 
 var React = require('react');
+
+/*
+    The <p> tag will always re-render when the static bundle.js
+    attaches to the DOM. Because the contents at the time of
+    attachment is different from the time of static rendering.
+*/
 var Footer = React.createClass({displayName: 'Footer',
     render: function () {
         return (
