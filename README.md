@@ -13,13 +13,25 @@
     * proxying /api to a remote service
     * handling auth with remote service on server?
 
+## Dependencies
+
+* Node.js
+
+## Installation
+
+    npm install -g gulp
+    npm install
+
+---
+
 ## Misc Notes and Questions
 
 * Is writing your app using the Flux architecture the opposite of writing "under the framework"?
     * How portable is your codebase?
 * Implications on design
     * the JSX in /src/components lends itself to atomic design
-    * after the stack is installed, BrowserSync provides a way to test your design on multiple devices simultaneously
+    * after the stack is installed (via `npm install`, BrowserSync provides a way to test your design on multiple devices simultaneously
+        * you could use fixture data
         * and one could add automated screenshots
     * you could create prototypes relatively quickly by:
         * serving stubbed out .json files from `/api-static`
