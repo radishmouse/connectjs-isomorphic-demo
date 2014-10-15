@@ -7,8 +7,9 @@
 * Routing: ReactRouter
 * Server Framework: Express 4.x
 * (not done) Models/Controllers: (Flux)
-    * what the hell is this app supposed to do?
+    * (what the hell is this app supposed to do?)
     * injecting initial state
+    * what if initial data is async?
 * (not done)HTTP/XHR: (superagent)
     * proxying /api to a remote service
     * handling auth with remote service on server?
@@ -37,11 +38,31 @@
         * serving stubbed out .json files from `/api-static`
         * using lo-fi CSS coupled with pre-built standard components
             * (similar to react-bootstrap)
-* How easy is it to do TDD with this style of development?
-    * Jest
-    * (and...what's that tool for diffing visuals?)
+* How easy is it to do TDD with this style of development? (That is, won't you have to test everything twice to make sure that the server-side rendering and browser rendering of components is the same?)
+    * Testing the changes that occur during user interaction is the same.
+    * Testing load of deep linking is what needs to be duplicated
+    * Otherwise, there are tools (yes, from Facebook) that work well with React/Flux based stack
+        * Jest for unit tests
+        * [Huxley](https://github.com/facebook/huxley) for visual regression
 * What is the payoff after using this complicated setup?
-    *
+    * The React/Flux stack was designed with scaling development by simplifying the mental model
+        * The conventions of your stack are data-flow centric, not object-mutation centric
+        * (If you think about an organization, you're focused on what people do, and not what they're called)
+    * Likewise, you allow your developers to play to their strengths
+        * Back end can build out APIs
+        * Front end can focus on performant UIs
+            * Per-screen API calls can be aggregated and cached on the Node server
+            * Component-based styling lends itself to styleguide driven development
+* And what are the tradeoffs?
+    * It's not an already established ecosystem (outside of places like Facebook or AirBnB) like Embularbone
+        * You can't just it up and build an app with a dozen lines of configuration
+        * But, at the same time, there is no magic, no mystery about the way it works.
+            * The ecosystem is largey npm
+    * Getting the stack set up is tricky
+        * There are a few sample projects on github
+            * including this one
+    * Training? Books?
+        * Big Nerd Ranch's Cross-Platform JavaScript Apps course is available
 
 ---
 
