@@ -15,12 +15,15 @@
     "react": "~0.11.2",
     "react-router": "~0.9.4",
     "reactify": "~0.14.0",
-    "vinyl-source-stream": "~1.0.0"
+    "vinyl-source-stream": "~1.0.0",
+    "flux": "~2.0.1",
+    "superagent": "~0.20.0"
   },
   "dependencies": {
     "react": "~0.11.2",
     "express": "~4.9.7",
     "node-jsx": "~0.11.0",
-    "superagent": "~0.20.0"
+    "superagent": "~0.20.0",
+    "flux": "~2.0.1"
   }
 }
