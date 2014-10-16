@@ -16,4 +16,4 @@ module.exports = function (src, bundleName, dest) {
             .pipe(source(bundleName))
             .pipe(gulp.dest(dest));
     };
-}
+};

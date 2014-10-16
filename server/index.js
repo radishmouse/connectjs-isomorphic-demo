@@ -17,7 +17,9 @@ var Router = require('react-router');
 var AppRoutes = require('../src/routes');
 
 // Deal with our static files first, e.g. `scripts/bundle.js`
-webapp.use('/scripts', express.static(path.join(__dirname, '../client/scripts')));
+['scripts', 'stylesheets', 'fonts'].forEach(function (asset) {
+    webapp.use('/' + asset, express.static(path.join(__dirname, '../client/' + asset)));
+});
 
 // Other than our /scripts folder, we want to match any other route
 // and let our react app take over, based on the value of req.path
@@ -58,8 +60,13 @@ webapp.get('*', function (req, res) {
     // Based on: https://github.com/rackt/react-router/blob/1b1a62b04b73f01eb64b3a0983c9c6781e65b6b9/modules/utils/__tests__/ServerRendering-test.js
     // And: https://github.com/rackt/react-router/commit/1b1a62b04b73f01eb64b3a0983c9c6781e65b6b9
 
-    var htmlString = '<!doctype html><html><head></head><body>';
-    htmlString += string;
+    var htmlString = '<!doctype html><html><head>';
+    htmlString += '<meta charset="utf-8">';
+    htmlString += '<title>isomorphic demo</title>';
+    htmlString += '<meta name="viewport" content="width=device-width, initial-scale=1">';
+    htmlString += '<link rel="stylesheet" href="stylesheets/application.css">';
+    htmlString += '</head><body>';
+    htmlString += htmlString;
     htmlString += '<script src="scripts/bundle.js"></script></body></html>';
     Router.renderRoutesToString(AppRoutes, req.path, function (err, reason, string) {
         res.send(htmlString);

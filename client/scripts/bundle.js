@@ -24056,14 +24056,9 @@ module.exports = require('./lib/React');
 },{"./lib/React":74}],194:[function(require,module,exports){
 /** @jsx React.DOM */
 var React = require('react');
-
 var Header = require('./components/header');
 var Footer = require('./components/footer');
-
 var App = React.createClass({displayName: 'App',
-    _timeStamp: function () {
-        return (new Date()).getTime();
-    },
     render: function () {
         return (
             React.DOM.section(null, 
@@ -24071,13 +24066,14 @@ var App = React.createClass({displayName: 'App',
 
                 /* equivalent to Ember's {{outlet}} */
                 this.props.activeRouteHandler(null), 
-
                 Footer({timeStamp: this._timeStamp()})
             )
         );
+    },
+    _timeStamp: function () {
+        return (new Date()).getTime();
     }
 });
-
 module.exports = App;
 },{"./components/footer":196,"./components/header":197,"react":193}],195:[function(require,module,exports){
 /** @jsx React.DOM */
@@ -24109,7 +24105,7 @@ var Footer = React.createClass({displayName: 'Footer',
     render: function () {
         return (
             React.DOM.footer(null, 
-                React.DOM.p(null, "© 2014 Levi-tato - ", this.props.timeStamp)
+                React.DOM.p(null, "© 2014 @radishmouse - ", this.props.timeStamp)
             )
         );
     }
@@ -24138,7 +24134,6 @@ module.exports = Header;
 /** @jsx React.DOM */
 'use strict';
 
-
 var React = require('react');
 var HelloWorld = React.createClass({displayName: 'HelloWorld',
     getInitialState: function () {
@@ -24146,16 +24141,16 @@ var HelloWorld = React.createClass({displayName: 'HelloWorld',
             _message: 'Hello, World!'
         };
     },
+    render: function () {
+        return (
+            React.DOM.h1({onClick: this._changeMessage}, this.state._message)
+        );
+    },
     _changeMessage: function () {
         return /Hello/.test(this.state._message) ?
             this.setState({_message: 'Goodbye, World!!!'})
             :
             this.setState({_message: 'Hello, World!'});
-    },
-    render: function () {
-        return (
-            React.DOM.h1({onClick: this._changeMessage}, this.state._message)
-        );
     }
 });
 

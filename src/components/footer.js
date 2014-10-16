@@ -13,7 +13,7 @@ var Footer = React.createClass({
     render: function () {
         return (
             <footer>
-                <p>&copy; 2014 Levi-tato - {this.props.timeStamp}</p>
+                <p>&copy; 2014 @radishmouse: {this.props.timeStamp}</p>
             </footer>
         );
     }

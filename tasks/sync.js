@@ -2,7 +2,6 @@
 
 // BrowserSync is a better live-reload + static server
 var browserSync = require('browser-sync');
-var reload = browserSync.reload;
 
 function _sync(dir){
     return function () {
@@ -15,17 +14,9 @@ function _sync(dir){
     };
 }
 
-function _reload(opts){
-    return function () {
-        reload(opts || {
-            stream: true
-        });
-    }
-}
-
 module.exports = {
     sync: _sync,
-    reload: _reload
+    reload: browserSync.reload
 };
 
 
