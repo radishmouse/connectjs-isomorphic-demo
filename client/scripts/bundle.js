@@ -25810,7 +25810,14 @@ var Yep = React.createClass({displayName: 'Yep',
     render: function () {
         var nodes = Object.keys(this.state.data).map(function (key) {
             var datum = this.state.data[key];
-            return (React.DOM.p({key: datum.id}, datum.name, ": ", datum.price))
+            return (
+            React.DOM.p({
+                key: datum._id, 
+                onClick: this._handleClick
+            }, 
+                datum.name, ": ", datum.price
+            )
+            );
         }.bind(this));
         return (
             React.DOM.div(null, 
@@ -25821,6 +25828,13 @@ var Yep = React.createClass({displayName: 'Yep',
         );
     },
 
+
+    // _handleClick: function (event) {
+    //     debugger;
+    //     // this.setState(this.state.data.filter(function (item) {
+    //     //     return true;
+    //     // }));
+    // },
     _onChange: function () {
         this.setState(getStateFromStore());
     }
@@ -25941,9 +25955,8 @@ module.exports = {
 
     getAllNodes: function() {
 
-        // for now, just return some JSON
-        // we'll add superagent shortly
-        // then, we will add caching if we're on the server
+        // fake caching via intermediary variable
+        ActionCreator.receiveAll(_data);
 
         request.get(URL, function (res){
             _data = res.body;

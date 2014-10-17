@@ -10,9 +10,8 @@ module.exports = {
 
     getAllNodes: function() {
 
-        // for now, just return some JSON
-        // we'll add superagent shortly
-        // then, we will add caching if we're on the server
+        // fake caching via intermediary variable
+        ActionCreator.receiveAll(_data);
 
         request.get(URL, function (res){
             _data = res.body;

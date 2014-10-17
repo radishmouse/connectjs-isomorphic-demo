@@ -23,7 +23,14 @@ var Yep = React.createClass({
     render: function () {
         var nodes = Object.keys(this.state.data).map(function (key) {
             var datum = this.state.data[key];
-            return (<p key={datum.id}>{datum.name}: {datum.price}</p>)
+            return (
+            <p
+                key={datum._id}
+                onClick={this._handleClick}
+            >
+                {datum.name}: {datum.price}
+            </p>
+            );
         }.bind(this));
         return (
             <div>
@@ -34,6 +41,13 @@ var Yep = React.createClass({
         );
     },
 
+
+    // _handleClick: function (event) {
+    //     debugger;
+    //     // this.setState(this.state.data.filter(function (item) {
+    //     //     return true;
+    //     // }));
+    // },
     _onChange: function () {
         this.setState(getStateFromStore());
     }
