@@ -60,15 +60,15 @@ webapp.get('*', function (req, res) {
     // Based on: https://github.com/rackt/react-router/blob/1b1a62b04b73f01eb64b3a0983c9c6781e65b6b9/modules/utils/__tests__/ServerRendering-test.js
     // And: https://github.com/rackt/react-router/commit/1b1a62b04b73f01eb64b3a0983c9c6781e65b6b9
 
-    var htmlString = '<!doctype html><html><head>';
-    htmlString += '<meta charset="utf-8">';
-    htmlString += '<title>isomorphic demo</title>';
-    htmlString += '<meta name="viewport" content="width=device-width, initial-scale=1">';
-    htmlString += '<link rel="stylesheet" href="stylesheets/application.css">';
-    htmlString += '</head><body>';
-    htmlString += htmlString;
-    htmlString += '<script src="scripts/bundle.js"></script></body></html>';
     Router.renderRoutesToString(AppRoutes, req.path, function (err, reason, string) {
+        var htmlString = '<!doctype html><html><head>';
+        htmlString += '<meta charset="utf-8">';
+        htmlString += '<title>isomorphic demo</title>';
+        htmlString += '<meta name="viewport" content="width=device-width, initial-scale=1">';
+        htmlString += '<link rel="stylesheet" href="stylesheets/application.css">';
+        htmlString += '</head><body>';
+        htmlString += string;
+        htmlString += '<script src="scripts/bundle.js"></script></body></html>';
         res.send(htmlString);
     });
 });
